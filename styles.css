@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FFE4C4;
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section {
+    margin: 20px 0;
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ff7043;
+}
+
+.subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 15px 0;
+    color: #888;
+}
+
+#video, #canvas {
+    width: 100%;
+    height: auto;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: #000;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #FF7043;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #ff5722;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#diagnostic-section {
+    background-color: #ccffcc;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#report-container {
+    text-align: left;
+    padding: 10px;
+}
+
+#diagnostic-result, #susceptibility-result, #future-risk {
+    margin: 15px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.disclaimer {
+    font-size: 12px;
+    color: red;
+    margin-top: 10px;
+}
+
+#routine {
+    text-align: left;
+    padding-left: 10px;
+    color: #006400;
+}
+
+#product-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    width: 90%;
+    text-align: left;
+}
+
+.product h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.product p {
+    font-size: 14px;
+    color: #777;
+}

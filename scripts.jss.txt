@@ -1,0 +1,161 @@
+// Selecting elements
+const loginSection = document.getElementById('login-section');
+const userDetailsSection = document.getElementById('user-details-section');
+const cameraSection = document.getElementById('camera-section');
+const diagnosticSection = document.getElementById('diagnostic-section');
+const productsSection = document.getElementById('products-section');
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const captureBtn = document.getElementById('capture-btn');
+const diagnosticResult = document.getElementById('diagnostic-result');
+const susceptibilityResult = document.getElementById('susceptibility-result');
+const futureRisk = document.getElementById('future-risk');
+const routine = document.getElementById('routine');
+const productList = document.getElementById('product-list');
+
+// Initial page: Login Section
+loginSection.classList.add('active');
+
+// Handle login or registration
+document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username && password) {
+        alert('Login successful! Proceeding to user details...');
+        navigateToSection(userDetailsSection);
+    } else {
+        alert('Please enter both username and password.');
+    }
+});
+
+// User submits skin details
+document.getElementById('user-details-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const skinType = document.getElementById('skinType').value;
+    const knownConditions = document.getElementById('knownConditions').value;
+    const age = document.getElementById('age').value;
+
+    if (skinType && age) {
+        alert('Skin details submitted! Ready for face scan.');
+        navigateToSection(cameraSection);
+        startCamera();
+    } else {
+        alert('Please fill all the required fields.');
+    }
+});
+
+// Access user's camera
+function startCamera() {
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+            video.srcObject = stream;
+        })
+        .catch((err) => {
+            console.error("Camera error: ", err);
+        });
+}
+
+// Capture image
+captureBtn.addEventListener('click', () => {
+    const context = canvas.getContext('2d');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    canvas.style.display = 'block';
+
+    // Simulate image analysis and product recommendation
+    analyzeSkinCondition();
+});
+
+// Simulated GPT-4 Vision API for skin analysis
+function analyzeSkinCondition() {
+    navigateToSection(diagnosticSection);
+    diagnosticResult.textContent = "Analyzing your skin...";
+    setTimeout(() => {
+        const analysis = getMockSkinAnalysis();
+        displayDiagnosticReport(analysis);
+        displayProductRecommendations(analysis.condition);
+    }, 2000); // Simulating API delay
+}
+
+// Display diagnostic report
+function displayDiagnosticReport(analysis) {
+    diagnosticResult.textContent = `Skin Condition: ${analysis.condition}`;
+    susceptibilityResult.textContent = `Risk: ${analysis.risk}`;
+    futureRisk.textContent = `Future Potential Disease: ${analysis.futureRisk}`;
+    routine.innerHTML = '';
+    analysis.routine.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        routine.appendChild(li);
+    });
+}
+
+// Display recommended products based on analysis
+function displayProductRecommendations(condition) {
+    navigateToSection(productsSection);
+    const recommendedProducts = getMockProducts(condition);
+    productList.innerHTML = ''; // Clear previous list
+    recommendedProducts.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+        productDiv.innerHTML = `
+            <h2>${product.name}</h2>
+            <p>Brand: ${product.brand}</p>
+            <p>Price: ${product.price}</p>
+            <p>Rating: ${product.rating}</p>
+            <p>Reviews: ${product.reviews}</p>
+        `;
+        productList.appendChild(productDiv);
+    });
+}
+
+// Mock data: GPT-4 Vision simulated skin analysis
+function getMockSkinAnalysis() {
+    return {
+        condition: "Oily Skin with Acne",
+        risk: "High risk of breakouts",
+        futureRisk: "Risk of Cystic Acne",
+        routine: [
+            "Use oil-free moisturizers",
+            "Cleanse your face twice a day",
+            "Use sunscreen daily",
+            "Avoid heavy makeup"
+        ]
+    };
+}
+
+// Mock data: Product recommendations (Amazon & Nykaa API simulation)
+function getMockProducts(condition) {
+    return [
+        {
+            name: "Oil-Free Moisturizer",
+            brand: "Neutrogena",
+            price: "$24.99",
+            rating: "4.5/5",
+            reviews: "Great for oily skin, lightweight and non-greasy."
+        },
+        {
+            name: "Acne Cleanser",
+            brand: "Cetaphil",
+            price: "$18.50",
+            rating: "4.7/5",
+            reviews: "Helps reduce acne and unclogs pores effectively."
+        },
+        {
+            name: "Pore Minimizing Toner",
+            brand: "The Ordinary",
+            price: "$15.99",
+            rating: "4.3/5",
+            reviews: "Tightens pores and gives a refreshing feel."
+        }
+    ];
+}
+
+// Function to navigate between sections
+function navigateToSection(section) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    section.classList.add('active');
+}

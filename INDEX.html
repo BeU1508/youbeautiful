@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeU Skin Health</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="app">
+        <!-- Landing Page (Login/Register) -->
+        <section id="login-section" class="section active">
+            <h1 class="title">WELCOME TO BEU</h1>
+            <p class="subtitle">MONITOR AND ASSESS YOUR SKIN HEALTH</p>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="ENTER USERNAME" required />
+                <input type="password" id="password" placeholder="ENTER PASSWORD" required />
+                <button type="submit">LOGIN / REGISTER</button>
+            </form>
+        </section>
+
+        <!-- User Details Form Section -->
+        <section id="user-details-section" class="section">
+            <h1 class="title">TELL US ABOUT YOUR SKIN</h1>
+            <form id="user-details-form">
+                <label for="age">AGE:</label>
+                <input type="number" id="age" required />
+
+                <label for="skinType">SKIN TYPE:</label>
+                <select id="skinType" required>
+                    <option value="">SELECT SKIN TYPE</option>
+                    <option value="Normal">NORMAL</option>
+                    <option value="Oily">OILY</option>
+                    <option value="Dry">DRY</option>
+                    <option value="Combination">COMBINATION</option>
+                    <option value="Sensitive">SENSITIVE</option>
+                </select>
+
+                <label for="knownConditions">KNOWN SKIN CONDITIONS (IF ANY):</label>
+                <input type="text" id="knownConditions" placeholder="E.G., ACNE, ECZEMA" />
+
+                <label for="exposure">SUN EXPOSURE (DAILY IN HOURS):</label>
+                <input type="number" id="exposure" placeholder="E.G., 2 HOURS" required />
+
+                <label for="hydration">WATER INTAKE (LITERS/DAY):</label>
+                <input type="number" id="hydration" required />
+
+                <label for="diet">DIET (VEGAN, VEGETARIAN, NON-VEG):</label>
+                <input type="text" id="diet" placeholder="E.G., VEGAN" required />
+
+                <label for="stressLevel">STRESS LEVEL (1-10):</label>
+                <input type="number" id="stressLevel" min="1" max="10" required />
+
+                <button type="submit">SUBMIT</button>
+            </form>
+        </section>
+
+        <!-- Camera and Diagnostic Section -->
+        <section id="camera-section" class="section">
+            <h1 class="title">SCAN YOUR FACE</h1>
+            <video id="video" autoplay></video>
+            <button id="capture-btn">CAPTURE IMAGE</button>
+            <canvas id="canvas"></canvas>
+            <p class="subtitle">POSITION YOUR FACE AND PRESS "CAPTURE IMAGE".</p>
+        </section>
+
+        <!-- Diagnostic Report Section -->
+        <section id="diagnostic-section" class="section">
+            <h1 class="title">DIAGNOSTIC REPORT</h1>
+            <div id="report-container">
+                <p id="diagnostic-result">ANALYZING YOUR SKIN...</p>
+                <p id="susceptibility-result"></p>
+                <p id="future-risk"></p>
+                <h2>PERSONALIZED SKINCARE ROUTINE:</h2>
+                <ul id="routine"></ul>
+                <p class="disclaimer">THIS REPORT DOES NOT SUBSTITUTE FOR PROFESSIONAL MEDICAL ADVICE.</p>
+            </div>
+        </section>
+
+        <!-- Product Recommendation Section -->
+        <section id="products-section" class="section">
+            <h1 class="title">RECOMMENDED PRODUCTS</h1>
+            <div id="product-list"></div>
+        </section>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
